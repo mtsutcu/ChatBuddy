@@ -1,6 +1,7 @@
 package com.mtsapps.chatbuddy.ui.homefragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 import com.mtsapps.chatbuddy.R
 import com.mtsapps.chatbuddy.databinding.FragmentHomeBinding
 import com.mtsapps.chatbuddy.models.ApiRequest
@@ -29,6 +31,7 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeFragmentViewModel by viewModels()
     private val homeAdapter: HomeAdapter by lazy { HomeAdapter(requireContext()) }
+
 
 
     override fun onCreateView(

@@ -6,17 +6,6 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.mtsapps.chatbuddy.ui.homefragment.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/toHistoryPage"
-            app:destination="@id/historyFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
-    </fragment>
-    <fragment
         android:id="@+id/historyFragment"
         android:name="com.mtsapps.chatbuddy.ui.historyfragment.HistoryFragment"
         android:label="fragment_history"
@@ -38,5 +27,15 @@
         <argument
             android:name="chat"
             app:argType="com.mtsapps.chatbuddy.models.Chat" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.mtsapps.chatbuddy.ui.homefragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/toHistoryPage"
+            app:destination="@id/historyFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
 </navigation>
