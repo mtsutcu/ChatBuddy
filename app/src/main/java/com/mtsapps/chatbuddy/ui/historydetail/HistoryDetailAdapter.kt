@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mtsapps.chatbuddy.R
 import com.mtsapps.chatbuddy.databinding.RecieveMessageItemBinding
 import com.mtsapps.chatbuddy.databinding.SendMessageItemBinding
 import com.mtsapps.chatbuddy.models.CustomMessage
@@ -48,29 +49,13 @@ class HistoryDetailAdapter(private val context: Context) :
                     )
                 TypeTwoViewHolder(binding, context)
             }
-            /* VIEW_LOADING -> {
-                 val binding = MessageLoadingBinding.inflate(
-                     LayoutInflater.from(parent.context),
-                     parent,
-                     false
-                 )
-                 TypeThirdHolder(binding)
-             }*/
+      
             else -> throw java.lang.IllegalArgumentException("")
 
         }
 
     }
 
-    /*class TypeThirdHolder(private val binding: MessageLoadingBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: RoomMessage?) {
-
-
-        }
-
-
-    }*/
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
@@ -83,10 +68,6 @@ class HistoryDetailAdapter(private val context: Context) :
                 holder.bind(item, position)
             }
 
-            /* is TypeThirdHolder -> {
-                 val item = getItem(position)
-                 holder.bind(item)
-             }*/
         }
     }
 
@@ -123,7 +104,7 @@ class HistoryDetailAdapter(private val context: Context) :
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("text", text)
             clipboard.setPrimaryClip(clip)
-            Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.copied), Toast.LENGTH_SHORT).show()
         }
     }
 

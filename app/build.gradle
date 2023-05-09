@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.mtsapps.chatbuddy"
-        minSdk 23
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -76,14 +76,15 @@ dependencies {
     kapt "androidx.room:room-compiler:2.5.0-beta01"
     implementation "androidx.room:room-ktx:2.4.3"
 
-
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
-    //Admob
+    //Admob 
     implementation 'com.google.android.gms:play-services-ads:22.0.0'
+
+
 
 
 }

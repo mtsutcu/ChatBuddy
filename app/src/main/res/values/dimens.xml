@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="dialogTitleText">21sp</dimen>
+    <dimen name="dialogButtonText">18sp</dimen>
+    <dimen name="hintSize">12sp</dimen>
+    <dimen name="emptySize">20sp</dimen>
+    <dimen name="editTextRadius">7dp</dimen>
+    <dimen name="historyTextSize">15sp</dimen>
+</resources>

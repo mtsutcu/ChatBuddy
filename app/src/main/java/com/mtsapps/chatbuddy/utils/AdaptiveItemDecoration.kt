@@ -24,9 +24,6 @@ class AdaptiveItemDecoration : RecyclerView.ItemDecoration() {
         Log.e("position", position.toString())
 
 
-        /*if (position == parent.adapter!!.itemCount-1) {
-            outRect.bottom = itemSpacingBig
-        }*/
         val currentViewType = parent.adapter?.getItemViewType(position) ?: return
 
         if (position > 0) {

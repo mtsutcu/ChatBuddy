@@ -6,5 +6,4 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HistoryDetailViewModel@Inject constructor (private val repository: Repository)  : ViewModel() {
-}
+class HistoryDetailViewModel@Inject constructor (private val repository: Repository)  : ViewModel()

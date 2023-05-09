@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/radius_edit_text"
         android:ems="10"
-        android:hint="Say something..."
+        android:hint="@string/say_something"
         android:inputType="textPersonName"
-        android:textColorHint="#4a4a4a"
-        android:textSize="10sp" />
+        android:textColorHint="@color/hintColor"
+        android:textSize="@dimen/hintSize" />
 </FrameLayout>

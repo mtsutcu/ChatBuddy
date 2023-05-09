@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_new_24"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Chat Buddy"
         app:titleCentered="true" />
@@ -30,4 +31,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialToolbar3"
         app:layout_constraintVertical_bias="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

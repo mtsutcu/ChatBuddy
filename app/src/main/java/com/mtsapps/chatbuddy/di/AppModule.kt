@@ -21,12 +21,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-    /*@Provides
-    @Singleton
-    fun provideChatDatabase(@ApplicationContext context: Context){
-
-    }*/
-
     @Provides
     @Singleton
     fun provideChatDao(@ApplicationContext context: Context) : ChatDao{
@@ -45,8 +39,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(remoteDataSource: RemoteDataSource,localDataSource: LocalDataSource): Repository {
-        return Repository(remoteDataSource,localDataSource)
+    fun provideRepository(remoteDataSource: RemoteDataSource,localDataSource: LocalDataSource,@ApplicationContext context: Context): Repository {
+        return Repository(remoteDataSource,localDataSource,context)
     }
 
     @Provides
@@ -58,16 +52,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(apiHelper: OpenAIApi): RemoteDataSource {
-        return RemoteDataSource(apiHelper)
+    fun provideRemoteDataSource(apiHelper: OpenAIApi, @ApplicationContext context: Context): RemoteDataSource {
+        return RemoteDataSource(apiHelper,context)
     }
 
-    /* @Provides
-     @Singleton
-     fun provideMessagesDao(@ApplicationContext context: Context): MessagesDao {
-         val db = Room.databaseBuilder(context, ChatGPTDataBase::class.java, "chatgpt_db.sqlite")
-             .createFromAsset("chatgpt_db.sqlite").build()
-         return db.getMessagesDao()
-     }*/
 
 }

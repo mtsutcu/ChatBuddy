@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mtsapps.chatbuddy.R
 import com.mtsapps.chatbuddy.databinding.RecieveMessageItemBinding
 import com.mtsapps.chatbuddy.databinding.SendMessageItemBinding
 import com.mtsapps.chatbuddy.models.CustomMessage
@@ -18,12 +19,17 @@ class HomeAdapter(private val context: Context) :
     ListAdapter<CustomMessage, RecyclerView.ViewHolder>(MyDiffCallback()) {
 
     override fun getItemViewType(position: Int): Int {
-        return when (getItem(position).role) {
-            "user" -> VIEW_USER
-            "assistant" -> VIEW_BOT
-            "loading" -> VIEW_LOADING
-            else -> throw java.lang.IllegalArgumentException("")
-        }
+
+       if(position != -1){
+           return when (getItem(position).role) {
+               "user" -> VIEW_USER
+               "assistant" -> VIEW_BOT
+               // "loading" -> VIEW_LOADING
+               else -> throw java.lang.IllegalArgumentException("")
+           }
+       }else
+           return 0
+
     }
 
 
@@ -37,6 +43,7 @@ class HomeAdapter(private val context: Context) :
                         parent,
                         false
                     )
+
                 TypeOneViewHolder(binding)
             }
             VIEW_BOT -> {
@@ -46,31 +53,18 @@ class HomeAdapter(private val context: Context) :
                         parent,
                         false
                     )
-                TypeTwoViewHolder(binding, context)
+                TypeTwoViewHolder(binding, context,)
             }
-            /* VIEW_LOADING -> {
-                 val binding = MessageLoadingBinding.inflate(
-                     LayoutInflater.from(parent.context),
-                     parent,
-                     false
-                 )
-                 TypeThirdHolder(binding)
-             }*/
+
             else -> throw java.lang.IllegalArgumentException("")
 
         }
 
     }
 
-    /*class TypeThirdHolder(private val binding: MessageLoadingBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: RoomMessage?) {
 
 
-        }
 
-
-    }*/
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
@@ -83,10 +77,6 @@ class HomeAdapter(private val context: Context) :
                 holder.bind(item, position)
             }
 
-            /* is TypeThirdHolder -> {
-                 val item = getItem(position)
-                 holder.bind(item)
-             }*/
         }
     }
 
@@ -105,8 +95,10 @@ class HomeAdapter(private val context: Context) :
     class TypeTwoViewHolder(
         private val binding: RecieveMessageItemBinding,
         private val context: Context,
+
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CustomMessage, position: Int) {
+
 
             binding.recMessageText.text = item.content
 
@@ -114,7 +106,6 @@ class HomeAdapter(private val context: Context) :
                 copyToClipboard(context, item.content)
                 return@setOnLongClickListener true
             }
-            Log.e("adapter-typeTwoHolder", item.content)
 
 
         }
@@ -123,7 +114,7 @@ class HomeAdapter(private val context: Context) :
             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("text", text)
             clipboard.setPrimaryClip(clip)
-            Toast.makeText(context, "Copied", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,context.getString(R.string.copied), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -131,7 +122,7 @@ class HomeAdapter(private val context: Context) :
     companion object {
         private const val VIEW_USER = 0
         private const val VIEW_BOT = 1
-        private const val VIEW_LOADING = 2
+
     }
 
     class MyDiffCallback : DiffUtil.ItemCallback<CustomMessage>() {

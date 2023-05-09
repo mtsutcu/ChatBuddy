@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="editTextBackground">#222222</color>
+    <color name="gptGreen">#50da4d</color>
+    <color name="dialogNegative">#C83838</color>
+    <color name="hintColor">#4a4a4a</color>
 </resources>

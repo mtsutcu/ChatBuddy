@@ -36,6 +36,7 @@
         <action
             android:id="@+id/toHistoryPage"
             app:destination="@id/historyFragment"
-            app:enterAnim="@android:anim/slide_in_left" />
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 </navigation>

@@ -31,6 +31,12 @@ class HistoryViewModel @Inject constructor (private val repository: Repository) 
         }
     }
 
+    fun deleteChat(chat: Chat){
+        viewModelScope.launch {
+            repository.deleteChat(chat)
+        }
+    }
+
 }
 
 data class HistoryPageState(

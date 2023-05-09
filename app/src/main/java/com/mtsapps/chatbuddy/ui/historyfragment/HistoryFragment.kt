@@ -7,25 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mtsapps.chatbuddy.R
+import androidx.recyclerview.widget.RecyclerView
 import com.mtsapps.chatbuddy.databinding.FragmentHistoryBinding
-import com.mtsapps.chatbuddy.ui.homefragment.HomeFragmentViewModel
+import com.mtsapps.chatbuddy.utils.AdaptiveItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
-
     private var _binding : FragmentHistoryBinding? = null
     private val binding get() = _binding!!
-
     private val historyViewModel: HistoryViewModel by viewModels()
-    private val historyAdapter : HistoryAdapter by lazy { HistoryAdapter(historyViewModel) }
+    private val historyAdapter : HistoryAdapter by lazy { HistoryAdapter(historyViewModel,requireContext(),layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +40,21 @@ class HistoryFragment : Fragment() {
         binding.rvHistory.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = historyAdapter
+            binding.rvHistory.addItemDecoration(AdaptiveItemDecoration())
         }
+        binding.rvHistory.adapter?.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                binding.rvHistory.layoutManager?.scrollToPosition(historyAdapter.itemCount - 1)
+            }
+        })
+
+        binding.materialToolbar2.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
+
 
         getChats()
     }
@@ -51,7 +63,13 @@ class HistoryFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 historyViewModel.viewState.collectLatest {
+                    if (it.chats?.isEmpty() == true){
+                        binding.historyEmptyText.visibility = View.VISIBLE
+                    }else{
+                        binding.historyEmptyText.visibility = View.INVISIBLE
+                    }
                     historyAdapter.submitList(it.chats?.map {
+
                         it.copy()
                     })
                 }

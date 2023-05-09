@@ -2,18 +2,14 @@ package com.mtsapps.chatbuddy.ui.historydetail
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mtsapps.chatbuddy.R
 import com.mtsapps.chatbuddy.databinding.FragmentHistoryDetailBinding
-import com.mtsapps.chatbuddy.databinding.FragmentHomeBinding
-import com.mtsapps.chatbuddy.ui.homefragment.HomeAdapter
-import com.mtsapps.chatbuddy.ui.homefragment.HomeFragmentViewModel
 import com.mtsapps.chatbuddy.utils.AdaptiveItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,12 +19,7 @@ class HistoryDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val bundle : HistoryDetailFragmentArgs by navArgs()
 
-    //private val historyDetailViewModel: HistoryDetailViewModel by viewModels()
     private val historyDetailAdapter: HistoryDetailAdapter by lazy { HistoryDetailAdapter(requireContext()) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +40,12 @@ class HistoryDetailFragment : Fragment() {
             binding.rvHistoryDetail.addItemDecoration(AdaptiveItemDecoration())
         }
         historyDetailAdapter.submitList(bundle.chat.messages)
+        binding.materialToolbar3.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
+
+
 
 
 }
