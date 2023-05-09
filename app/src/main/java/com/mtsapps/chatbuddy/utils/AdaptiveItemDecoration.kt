@@ -21,35 +21,23 @@ class AdaptiveItemDecoration : RecyclerView.ItemDecoration() {
 
         val position = parent.getChildAdapterPosition(view)
         val itemCount = parent.adapter?.itemCount ?: return
-        Log.e("position", position.toString())
-
-
         val currentViewType = parent.adapter?.getItemViewType(position) ?: return
 
         if (position > 0) {
-            // Get view type of previous item, if not the first item
             val previousViewType = parent.adapter?.getItemViewType(position - 1) ?: return
-
-            // Set spacing based on view type
             val spacing = when {
                 currentViewType == previousViewType -> {
-                    // If current item view type is same as previous item view type, set smaller spacing
                     itemSpacingSmall
                 }
                 position == itemCount - 1 -> {
-                    // If current item is the last item, set bottom spacing
                     itemSpacingBig
                 }
                 else -> {
-                    // Otherwise, set normal spacing
                     itemSpacingBig
                 }
             }
-
-            // Apply spacing to the item view
             outRect.top = spacing
         } else {
-            // If first item, set normal spacing
             outRect.top = itemSpacingBig
         }
     }
