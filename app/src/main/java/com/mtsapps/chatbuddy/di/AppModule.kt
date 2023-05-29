@@ -30,7 +30,7 @@ class AppModule {
         return database.chatDao()
 
     }
-
+ 
     @Provides
     @Singleton
     fun provideApiHelper(): OpenAIApi {

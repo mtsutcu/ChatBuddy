@@ -13,7 +13,6 @@ import com.mtsapps.chatbuddy.databinding.CustomDialogBinding
 class CustomDialogClass(context: Context) : DialogFragment() {
         private lateinit var  dialogBinding : CustomDialogBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //getDialog()!!.getWindow()?.setBackgroundDrawableResource(R.drawable.round_corner);
         return inflater.inflate(R.layout.custom_dialog, container, false)
     }
     override fun onStart() {

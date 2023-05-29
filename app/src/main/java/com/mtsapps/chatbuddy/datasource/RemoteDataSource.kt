@@ -26,7 +26,6 @@ class RemoteDataSource(var openAIApi: OpenAIApi,var context: Context) {
 
             }) }
         }catch (e: IOException){
-            Log.e("exeep",e.message.toString())
             Toast.makeText(context,context.getString(R.string.checkInternet),Toast.LENGTH_LONG).show()
         }
 

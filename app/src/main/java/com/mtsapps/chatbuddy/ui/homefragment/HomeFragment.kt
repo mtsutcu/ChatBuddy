@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         binding.rvHome.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = homeAdapter
-            binding.rvHome.addItemDecoration(AdaptiveItemDecoration())
+            addItemDecoration(AdaptiveItemDecoration())
         }
         binding.rvHome.adapter?.registerAdapterDataObserver(object :
             RecyclerView.AdapterDataObserver() {
@@ -113,7 +113,6 @@ class HomeFragment : Fragment() {
                     dialogBinding.negativeButton.text = getString(R.string.no)
 
                     dialogBinding.positiveButton.setOnClickListener {
-                        Log.e("positive", "successful")
                         homeViewModel.addChat()
                         dialog.dismiss()
                         val navController: NavController =
